@@ -1,4 +1,15 @@
 function M = AdaptiveUnsupervised(Xfea,MTable)
+% Adaptive Unsupervised self-tuning scheme for the TPTSSR parameter M.
+%
+% 
+%         Input:
+%           Xfea            - Train Matrix (each column represent a sample).
+%           Xgnd            - Label vector containing the labels of Xfea matrix.
+% 
+% 
+% 
+%         Output:
+%           M               - Estimated number of samples that should be moved to the second phase of TPTSSR. 
 
 N = size(Xfea, 2);
 
