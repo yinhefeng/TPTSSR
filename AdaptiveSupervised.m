@@ -1,4 +1,17 @@
 function M = AdaptiveSupervised(Xfea, Xgnd, MArray)
+% Adaptive Supervised self-tuning scheme for the TPTSSR parameter M.
+%
+% 
+%         Input:
+%           Xfea            - Train Matrix (each column represent a sample).
+%           Xgnd            - Label vector containing the labels of Xfea matrix.
+%           MArray          - Array of possible values for M
+% 
+% 
+% 
+%         Output:
+%           M               - Estimated number of samples that should be moved to the second phase of TPTSSR. 
+
 N = size(Xfea, 2);
 
 for i=1:N
