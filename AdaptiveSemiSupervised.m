@@ -1,4 +1,20 @@
-function M = AdaptiveSemiSupervised(Xfea, Xgnd, labeled_mask, MTable)
+function M = AdaptiveSemiSupervised(Xfea, Xgnd, labeled_mask, MArray)
+% Adaptive Semi-supervised self-tuning scheme for the TPTSSR parameter M.
+%
+% 
+%         Input:
+%           Xfea            - Train Matrix (each column represent a sample).
+%           Xgnd            - Label vector containing the labels of Xfea matrix.
+%           labeled_mask    - A binary vector clarifying the labeled and unlabeled data,
+%                             0 means the correspond data is unlabeled and 1 means
+%                             the correspond data is labeled. Size of the vector is
+%                             1xP. The same as labels vector.
+%           MArray          - Array of possible values for M
+% 
+% 
+% 
+%         Output:
+%           M               - Estimated number of samples that should be moved to the second phase of TPTSSR. 
 
 N = size(Xfea, 2);
 
@@ -23,7 +39,7 @@ end
 
 D(:,end)=[];
 for i = 1:N
-    for j=MTable
+    for j=MArray
         if D(i,j)>mean(D(i,:))
             M(i,1)=j;
             break;
@@ -41,7 +57,7 @@ lbgnd = Xgnd(:,labeled_mask==1);
 l = sum(lbgnd==1);
 u=sum(Xgnd==1)-l;
 
-M2 = AdaptiveSupervised(lbfea, lbgnd, MTable);
+M2 = AdaptiveSupervised(lbfea, lbgnd, MArray);
 
 M=[M;M2'];
 % M2 = reshape(M2,l,nbClass);
